@@ -22,7 +22,7 @@ const Summary = () => {
                         <div class="stat-desc text-2xl">Reviews</div>
                     </div>
                     <div class="stat border-sky-500">
-                        <div class="stat-title text-2xl">Tools</div>
+                        <div class="stat-title text-2xl">Drill</div>
                         <div class="stat-value">500k+</div>
                         <div class="stat-desc text-2xl">made</div>
                     </div>

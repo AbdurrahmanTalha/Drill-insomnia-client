@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Tool = ({ tool }) => {
-    console.log(tool)
     const { name, desc, quantity, price, img } = tool
     return (
         <div class="card lg:max-w-lg bg-base-100 shadow-xl">
