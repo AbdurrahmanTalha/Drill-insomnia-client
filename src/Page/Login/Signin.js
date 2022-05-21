@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Loading from '../../Components/Loading';
 import auth from '../../firebase.init';
+import useToken from '../../Hooks/useToken';
 
 const Signin = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -19,11 +20,15 @@ const Signin = () => {
         await signInWithEmailAndPassword(data.email, data.password)
         console.log(user)
     }
+    const [token] = useToken(user || gUser)
     const handleGoogleSignin = () => {
         signInWithGoogle()
     }
     if (gUser || user) {
         navigate('/')
+    }
+    if (token) {
+        
     }
     if (loading || gLoading) {
         return <Loading></Loading>
