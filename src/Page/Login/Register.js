@@ -1,33 +1,68 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import SocialLogin from './SocialLogin';
-
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import auth from "../../firebase.init.js"
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import Loading from '../../Components/Loading';
 const Register = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useCreateUserWithEmailAndPassword(auth);
+    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth)
+    const [updateProfile, updating, uError] = useUpdateProfile(auth);
+    const navigate = useNavigate()
+    const onSubmit = async data => {
+        createUserWithEmailAndPassword(data.email, data.password)
+        await updateProfile({ displayName: data.name })
+        console.log(user)
+    }
+    const handleGoogleSignin = () => {
+        signInWithGoogle()
+    }
+    if (updating || loading || gLoading) {
+        return <Loading></Loading>
+    }
+    if (gUser || user) {
+        navigate('/')
+    }
     return (
         <div className="mb-10">
             <h2 className="text-center text-2xl mb-5">Register</h2>
             <div className="w-50 flex justify-center items-center">
-                <form class="form-control w-full max-w-xs">
-                    <label class="label">
-                        <span class="label-text">What is your Name?</span>
+                <form className="form-control w-full max-w-xs" onSubmit={handleSubmit(onSubmit)}>
+                    <label className="label">
+                        <span className="label-text">What is your Name?</span>
                     </label>
-                    <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-                    <label class="label">
-                        <span class="label-text">What is your Email?</span>
+                    <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs"{...register("name")} />
+                    <label className="label">
+                        <span className="label-text">What is your Email?</span>
                     </label>
-                    <input type="email" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-                    <label class="label">
-                        <span class="label-text">What is your Password?</span>
+                    <input type="email" {...register("email")} placeholder="Type here" className="input input-bordered w-full max-w-xs" />
+                    <label className="label">
+                        <span className="label-text">What is your Password?</span>
                     </label>
-                    <input type="password" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-                    <label class="label">
-                        <span class="label-text-alt">Already have a account? <Link to="/login" className="underline-offset-1 underline text-blue-500">Login!</Link></span>
+                    <input type="password" {...register("password")} placeholder="Type here" className="input input-bordered w-full max-w-xs" />
+                    <label className="label">
+                        <span className="label-text-alt">Already have a account? <Link to="/login" className="underline-offset-1 underline text-blue-500">Login!</Link></span>
+                    </label>
+                    {error && <p className="text-red-500 text-1xl">{error?.message}</p>}
+                    {uError && <p className="text-red-500 text-1xl">{uError?.message}</p>}
+                    {gError && <p className="text-red-500 text-1xl">{gError?.message}</p>}
+                    <button className="btn btn-primary" type="submit">Register</button>
+                    <div className="flex flex-col w-full border-opacity-50">
+                        <div className="divider">OR</div>
+                        <div className="grid h-20 card rounded-box place-items-center">
 
-                    </label>
-                    <button className="btn btn-primary" type="submit">Login</button>
+                            <button className="btn btn-block" onClick={handleGoogleSignin}>CONTINUE WITH GOOGLE</button>
+                        </div>
 
-                    <SocialLogin></SocialLogin>
+                    </div>
                 </form>
+
             </div>
         </div>
     );

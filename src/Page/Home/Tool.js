@@ -3,15 +3,15 @@ import React from 'react';
 const Tool = ({ tool }) => {
     const { name, desc, quantity, price, img } = tool
     return (
-        <div class="card lg:max-w-lg bg-base-100 shadow-xl">
+        <div className="card lg:max-w-lg bg-base-100 shadow-xl">
             <figure><img src={img} className="rounded-xl w-2/3" alt="" /></figure>
-            <div class="card-body items-center text-center">
-                <h2 class="card-title">{name}</h2>
+            <div className="card-body items-center text-center">
+                <h2 className="card-title">{name}</h2>
                 <p>{desc}</p>
                 <p>$<small>{price}</small></p>
                 <p>Available: {quantity} </p>
-                <div class="card-actions justify-end">
-                    <button class="btn btn-primary">Purchase</button>
+                <div className="card-actions justify-end">
+                    <button className="btn btn-primary">Purchase</button>
                 </div>
             </div>
         </div>
