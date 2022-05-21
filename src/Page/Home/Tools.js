@@ -2,12 +2,11 @@ import React from 'react';
 import Tool from './Tool';
 import { useQuery } from "react-query"
 const Tools = () => {
-    const { isLoading, data: tools } = useQuery("tool", () => fetch("http://localhost:5000/tools").then(res => res.json())
+    const { isLoading, data: tools } = useQuery("tool", () => fetch("http://localhost:5000/tools/home").then(res => res.json())
     )
     if (isLoading) {
         return <p>Loading...</p>
     }
-    console.log(tools)
     return (
         <div className="p-5">
             <h2 className="text-center text-3xl mb-5">Tools</h2>
