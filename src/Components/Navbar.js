@@ -5,7 +5,7 @@ import auth from '../firebase.init';
 import { signOut } from 'firebase/auth';
 
 const Navbar = ({ children }) => {
-    const [user, loading, error] = useAuthState(auth);
+    const [user] = useAuthState(auth);
     const navigate = useNavigate()
 
     const handleSignOut = async () => {
@@ -28,7 +28,12 @@ const Navbar = ({ children }) => {
                         <ul className="menu menu-horizontal">
                             <li><Link to="/">Home</Link></li>
                             <li><Link to="/blog">Blog</Link></li>
-                            {user ? <li><button onClick={handleSignOut} className="btn text-white">Logout</button></li> : <li><Link to="/login" className="btn text-white">Login</Link></li>}
+                            {user && <>
+                                <li><Link to="/dashboard">Dashboard</Link></li>
+                            </>}
+                            {
+                                user ? <li><button onClick={handleSignOut} className="btn text-white">Logout</button></li> : <li><Link to="/login" className="btn text-white">Login</Link></li>}
+                            
                         </ul>
                     </div>
                 </div>

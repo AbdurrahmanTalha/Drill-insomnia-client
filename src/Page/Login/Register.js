@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from "../../firebase.init.js"
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import Loading from '../../Components/Loading';
@@ -14,9 +14,10 @@ const Register = () => {
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth)
-    const [token] = useToken(user|| gUser)
+    const [token] = useToken(user || gUser)
     const [updateProfile, updating, uError] = useUpdateProfile(auth);
     const navigate = useNavigate()
+    const location = useLocation()
     const onSubmit = async data => {
         createUserWithEmailAndPassword(data.email, data.password)
         await updateProfile({ displayName: data.name })
@@ -26,13 +27,14 @@ const Register = () => {
         signInWithGoogle()
     }
     if (token) {
-        
+
     }
     if (updating || loading || gLoading) {
         return <Loading></Loading>
     }
+    let from = location.state?.from?.pathname || "/";
     if (gUser || user) {
-        navigate('/')
+        navigate(from, { replace: true });
     }
     return (
         <div className="mb-10">
