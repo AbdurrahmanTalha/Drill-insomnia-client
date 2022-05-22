@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
-import auth from '../../firebase.init';
-
+import Loading from '../../Components/Loading';
+import ProductItem from './ProductItem';
+import DeletingConfirmModal from "./DeletingConfirmProductModal"
 const ManageProduct = () => {
-    const [products, setProducts] = useState([])
-    useEffect(() => {
-        fetch("http://localhost:5000/tools", {
-            method: "GET",
-            headers: {
-                authorization: `Bearer ${localStorage.getItem("accessToken")}`
-            }
-        })
-            .then(res => res.json())
-            .then(data => setProducts(data))
-    }, [])
-    console.log(products)
+    const [deletingProduct, setDeletingProduct] = useState(null)
+    const { data: products, isLoading, refetch } = useQuery('product', () => fetch("http://localhost:5000/tools", {
+        method: "GET",
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }).then(res => res.json()))
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
+    // console.log(products)
+
     return (
         <div>
             <h2>This is manage Products</h2>
@@ -32,23 +33,12 @@ const ManageProduct = () => {
                     </thead>
                     <tbody>
                         {
-                            products.map((product) =>
-                                <tr>
-                                    <td>{product._id}</td>
-                                    <td>{product.name}</td>
-                                    <td>{product.price}</td>
-                                    <td>{product.quantity}</td>
-                                    <td>{product.paid ? <button className="btn">Paid</button> : <>
-                                        <button className="btn">Pay</button><button className="btn ml-2">
-                                            DELETE
-                                        </button>
-                                    </>}</td>
-                                </tr>)
+                            products.map((product) => <ProductItem key={product._id} product={product}  setDeletingProduct={setDeletingProduct}></ProductItem>)
                         }
-
                     </tbody>
                 </table>
             </div>
+            {deletingProduct && <DeletingConfirmModal deletingProduct={deletingProduct} refetch={refetch}></DeletingConfirmModal>}
         </div>
     );
 };

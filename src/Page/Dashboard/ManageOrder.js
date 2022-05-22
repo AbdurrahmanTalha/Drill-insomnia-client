@@ -17,6 +17,8 @@ const ManageOrder = () => {
                 setOrders(data)
             })
     }, [])
+    
+   
 
     return (
         <div>
@@ -39,13 +41,13 @@ const ManageOrder = () => {
                             orders.map((order, index) =>
                                 <tr>
                                     <th>{index + 1}</th>
-                                    <td>{order.buyer}</td>
+                                    <th>{order.buyer}</th>
                                     <td>{order.phone}</td>
                                     <td>{order.orderAmount}</td>
                                     <td>{order.buyerAddress}</td>
                                     <td>{order.productName}</td>
-                                    <td>{order.paid ? <button className="btn">Paid</button> : <>
-                                        <button className="btn">Pay</button><button className="btn ml-2">
+                                    <td>{order.paid ? <button className="btn">Pending</button> : <>
+                                        <button className="btn">Unpaid</button><button className="btn ml-2">
                                             DELETE
                                         </button>
                                     </>}</td>
