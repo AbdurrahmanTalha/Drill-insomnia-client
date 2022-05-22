@@ -23,6 +23,42 @@ const PurchaseItem = () => {
     }, [drill]);
     // console.log(drill)
     const onSubmit = data => {
+        const purchase = {
+            buyer: data.buyer,
+            buyerEmail: data.buyerEmail,
+            phone: data.phone,
+            buyerAddress: data.buyerAddress,
+            orderAmount: data.orderAmount,
+            paid: false,
+            productId: drill._id
+        }
+        console.log(purchase)
+        fetch("http://localhost:5000/purchase", {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem("accessToken")}`
+            },
+            body: JSON.stringify(purchase)
+        })
+            .then(res => res.json())
+            .then(tool => {
+                if (tool.success) {
+                    const quantity = drill.quantity - data.orderAmount;
+                    const updatedQuantity = { quantity };
+                    const url = `http://localhost:5000/drill/${drill._id}`;
+                    fetch(url, {
+                        method: 'PUT',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(updatedQuantity)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                        })
+                }
+            })
 
     }
 
@@ -39,7 +75,7 @@ const PurchaseItem = () => {
                         <p class=" text-1xl">Available Quantity: {drill?.quantity}</p>
                         <p class="text-1xl">{drill?.desc}</p>
 
-                   </div>
+                    </div>
                     {/* </div> */}
                 </div>
                 <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">

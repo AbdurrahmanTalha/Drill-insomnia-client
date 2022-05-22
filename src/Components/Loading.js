@@ -2,7 +2,9 @@ import React from 'react';
 
 const Loading = () => {
     return (
-        <button className="btn btn-square loading">Loading...</button>
+        <div className="flex justify-center items-center w-100">
+            <button className="btn btn-square loading w-100">Loading...</button>
+        </div>
     );
 };
 
