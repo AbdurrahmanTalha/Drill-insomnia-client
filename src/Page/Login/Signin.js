@@ -7,7 +7,7 @@ import auth from '../../firebase.init';
 import useToken from '../../Hooks/useToken';
 
 const Signin = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit } = useForm();
     const [
         signInWithEmailAndPassword,
         user,
@@ -27,10 +27,10 @@ const Signin = () => {
     const location = useLocation()
     let from = location.state?.from?.pathname || "/";
     if (gUser || user) {
-        navigate(from, { replace: true });
+        console.log(gUser || user)
     }
     if (token) {
-        
+        // navigate(from, { replace: true });
     }
     if (loading || gLoading) {
         return <Loading></Loading>

@@ -14,15 +14,18 @@ const Register = () => {
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth)
+
     const [token] = useToken(user || gUser)
+
     const [updateProfile, updating, uError] = useUpdateProfile(auth);
     const navigate = useNavigate()
     const location = useLocation()
     const onSubmit = async data => {
-        await createUserWithEmailAndPassword(data.email, data.password)
-        await updateProfile({ displayName: data.name })
-        console.log(user)
+        createUserWithEmailAndPassword(data.email, data.password)
+        updateProfile({ displayName: data.name })
+        // console.log(user)
     }
+    console.log(user)
     const handleGoogleSignin = () => {
         signInWithGoogle()
     }
