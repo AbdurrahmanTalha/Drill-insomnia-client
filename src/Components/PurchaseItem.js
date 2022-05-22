@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import auth from '../firebase.init';
 
+import { toast } from 'react-toastify';
 const PurchaseItem = () => {
     const { drillId } = useParams()
     const [drill, setDrill] = useState();
@@ -24,7 +25,7 @@ const PurchaseItem = () => {
     // console.log(drill)
     const onSubmit = data => {
         if (drill.quantity < 1) {
-            console.log("Out of Stock");
+            toast.error("Out of Stock")
         } else {
             const purchase = {
                 buyer: data.buyer,
@@ -59,6 +60,7 @@ const PurchaseItem = () => {
                         })
                             .then(res => res.json())
                             .then(data => {
+                                toast.success(`Successfully Bought ${drill?.name}`)
                             })
                     }
                 })

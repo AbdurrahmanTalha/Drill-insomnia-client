@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { toast } from 'react-toastify';
 const AdminRow = ({ user, refetch, index }) => {
     const { email, role } = user;
     const handleMakeAdmin = () => {
@@ -11,14 +11,14 @@ const AdminRow = ({ user, refetch, index }) => {
         })
             .then(res => {
                 if (res.status === 403) {
-                    console.log("Failed To make a admin")
+                    toast.error("Failed To make a admin")
                 }
                 return res.json()
             })
             .then(data => {
-                console.log(data)
                 if (data.modifiedCount > 1) {
-                    console.log(`Successfully Made ${email} a admin`)
+                    toast.success(`Successfully Made ${email} a admin`)
+                    refetch()
                 }
             })
     }

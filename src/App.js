@@ -18,6 +18,9 @@ import Signin from './Page/Login/Signin';
 import MakeAdmin from "./Page/Dashboard/MakeAdmin"
 import ManageOrder from "./Page/Dashboard/ManageOrder"
 import ManageProduct from "./Page/Dashboard/ManageProduct"
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
   return (
@@ -45,6 +48,7 @@ function App() {
           <Route path="*" element={<NotFound></NotFound>}></Route>
         </Routes>
         <Footer></Footer>
+        <ToastContainer></ToastContainer>
       </Navbar>
     </div>
   );

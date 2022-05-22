@@ -15,7 +15,6 @@ const ManageProduct = () => {
     if (isLoading) {
         return <Loading></Loading>
     }
-    // console.log(products)
 
     return (
         <div>
@@ -33,7 +32,7 @@ const ManageProduct = () => {
                     </thead>
                     <tbody>
                         {
-                            products.map((product) => <ProductItem key={product._id} product={product}  setDeletingProduct={setDeletingProduct}></ProductItem>)
+                            products.map((product) => <ProductItem key={product._id} product={product} setDeletingProduct={setDeletingProduct}></ProductItem>)
                         }
                     </tbody>
                 </table>

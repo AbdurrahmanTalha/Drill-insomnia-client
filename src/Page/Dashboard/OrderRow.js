@@ -1,6 +1,6 @@
 import React from 'react';
 
-const OrderRow = ({ order, index, setDeleteOrder}) => {
+const OrderRow = ({ order, index, setDeleteOrder }) => {
     return (
         <tr key={order._id}>
             <th>{index + 1}</th>
@@ -11,8 +11,8 @@ const OrderRow = ({ order, index, setDeleteOrder}) => {
             <td>{order.productName}</td>
             <td>{order.paid ? <button className="btn">Paid</button> : <>
                 <button className="btn">Pay</button>
-                <label for="deleting-confirm-2" class="btn ml-2" onClick={() => setDeleteOrder(order)} >Cancle</label>
-               
+                <label htmlFor="deleting-confirm-2" className="btn ml-2" onClick={() => setDeleteOrder(order)} >Cancel</label>
+
             </>}</td>
         </tr>
     );

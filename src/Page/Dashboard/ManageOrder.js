@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
-import Loading from '../../Components/Loading';
+import DeletingConfirmOrderModal from './DeletingConfirmOrderModal';
+import ManageOrderRow from './ManageOrderRow';
 
 
 const ManageOrder = () => {
     const [orders, setOrders] = useState([])
+    const [deleteOrder, setDeleteOrder] = useState(null)
     useEffect(() => {
         fetch("http://localhost:5000/orders", {
             method: "GET",
@@ -17,8 +18,8 @@ const ManageOrder = () => {
                 setOrders(data)
             })
     }, [])
-    
-   
+
+
 
     return (
         <div>
@@ -39,24 +40,12 @@ const ManageOrder = () => {
                     <tbody>
                         {
                             orders.map((order, index) =>
-                                <tr>
-                                    <th>{index + 1}</th>
-                                    <th>{order.buyer}</th>
-                                    <td>{order.phone}</td>
-                                    <td>{order.orderAmount}</td>
-                                    <td>{order.buyerAddress}</td>
-                                    <td>{order.productName}</td>
-                                    <td>{order.paid ? <button className="btn">Pending</button> : <>
-                                        <button className="btn">Unpaid</button><button className="btn ml-2">
-                                            DELETE
-                                        </button>
-                                    </>}</td>
-                                </tr>)
+                                <ManageOrderRow key={order._id} order={order} setDeleteOrder={setDeleteOrder} index={index}></ManageOrderRow>)
                         }
-
                     </tbody>
                 </table>
             </div>
+            {deleteOrder && <DeletingConfirmOrderModal deleteOrder={deleteOrder}></DeletingConfirmOrderModal>}
         </div>
     );
 };

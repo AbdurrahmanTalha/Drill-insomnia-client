@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 const AddProduct = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
@@ -15,12 +16,12 @@ const AddProduct = () => {
             .then(res => res.json())
             .then(data => {
                 reset()
-                console.log(data)
+                toast.success("Added a product")
             })
     }
     return (
         <div>
-            <h2>This is add product</h2>
+            <h2>Add Product</h2>
             <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-control">
                     <label className="label">
