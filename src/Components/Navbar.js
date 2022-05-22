@@ -33,15 +33,15 @@ const Navbar = ({ children }) => {
                             </>}
                             {
                                 user ? <li><button onClick={handleSignOut} className="btn text-white">Logout</button></li> : <li><Link to="/login" className="btn text-white">Login</Link></li>}
-                            
+
                         </ul>
                     </div>
                 </div>
                 {children}
             </div>
-            <div class="drawer-side">
-                <label for="my-drawer-3" class="drawer-overlay"></label>
-                <ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
+            <div className="drawer-side">
+                <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
+                <ul className="menu p-4 overflow-y-auto w-80 bg-base-100">
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/blog">Blog</Link></li>
                     {user && <>

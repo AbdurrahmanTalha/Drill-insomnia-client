@@ -1,40 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
-import auth from '../../firebase.init';
+import { useQuery } from 'react-query';
+import Loading from '../../Components/Loading';
 
-const Orders = () => {
-    const [user] = useAuthState(auth)
+
+const ManageOrder = () => {
     const [orders, setOrders] = useState([])
-    const navigate = useNavigate();
     useEffect(() => {
-        const getOrders = () => {
-            const email = user.email;
-            const url = `http://localhost:5000/myOrder?email=${email}`
-            fetch(url, {
-                method: "GET",
-                headers: { authorization: `Bearer ${localStorage.getItem("accessToken")}` }
-            })
-                .then(res => res.json())
-                .then(data => setOrders(data))
-        }
-        getOrders();
-    }, [orders])
-    // console.log(orders)
-    const handleDeleteOrder = _id => {
-        console.log(_id)
-        fetch(`http://localhost:5000/orders/${_id}`, {
-            method: "DELETE",
+        fetch("http://localhost:5000/orders", {
+            method: "GET",
             headers: {
                 authorization: `Bearer ${localStorage.getItem("accessToken")}`
             }
         })
             .then(res => res.json())
-            .then(data => console.log(data))
-    }
+            .then(data => {
+                setOrders(data)
+            })
+    }, [])
+
     return (
         <div>
-            <h2>This is orders</h2>
+            <h2>This is Manage Orders</h2>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
@@ -42,7 +28,7 @@ const Orders = () => {
                             <th></th>
                             <th>Name</th>
                             <th>Phone</th>
-                            <th>Amount Bought</th>
+                            <th>Amount Buyed</th>
                             <th>Address</th>
                             <th>Product</th>
                             <th>Action</th>
@@ -51,7 +37,7 @@ const Orders = () => {
                     <tbody>
                         {
                             orders.map((order, index) =>
-                                <tr key={order._id}>
+                                <tr>
                                     <th>{index + 1}</th>
                                     <td>{order.buyer}</td>
                                     <td>{order.phone}</td>
@@ -59,8 +45,8 @@ const Orders = () => {
                                     <td>{order.buyerAddress}</td>
                                     <td>{order.productName}</td>
                                     <td>{order.paid ? <button className="btn">Paid</button> : <>
-                                        <button className="btn" >Pay</button><button onClick={() => handleDeleteOrder(order._id)} className="btn ml-2">
-                                            Cancel
+                                        <button className="btn">Pay</button><button className="btn ml-2">
+                                            DELETE
                                         </button>
                                     </>}</td>
                                 </tr>)
@@ -73,4 +59,4 @@ const Orders = () => {
     );
 };
 
-export default Orders;
+export default ManageOrder;

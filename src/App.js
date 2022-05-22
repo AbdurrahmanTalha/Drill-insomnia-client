@@ -4,8 +4,10 @@ import Footer from './Components/Footer';
 import Navbar from './Components/Navbar';
 import NotFound from './Components/NotFound';
 import PurchaseItem from './Components/PurchaseItem';
+import RequireAdmin from './Components/RequireAdmin';
 import RequireAuth from './Components/RequireAuth';
 import Blog from './Page/Blog/Blog';
+import AddProduct from './Page/Dashboard/AddProduct';
 import AddReview from './Page/Dashboard/AddReview';
 import Dashboard from './Page/Dashboard/Dashboard';
 import MyProfile from './Page/Dashboard/MyProfile';
@@ -13,6 +15,9 @@ import Orders from './Page/Dashboard/Orders';
 import Home from './Page/Home/Home';
 import Register from './Page/Login/Register';
 import Signin from './Page/Login/Signin';
+import MakeAdmin from "./Page/Dashboard/MakeAdmin"
+import ManageOrder from "./Page/Dashboard/ManageOrder"
+import ManageProduct from "./Page/Dashboard/ManageProduct"
 
 function App() {
   return (
@@ -28,11 +33,19 @@ function App() {
             <Route index element={<Orders></Orders>}></Route>
             <Route path="review" element={<AddReview></AddReview>}></Route>
             <Route path="profile" element={<MyProfile></MyProfile>}></Route>
+
+
+            <Route path="addProduct" element={<RequireAdmin><AddProduct></AddProduct></RequireAdmin>}></Route>
+            <Route path="admin" element={<RequireAdmin><MakeAdmin /></RequireAdmin>}></Route>
+            <Route path="allOrder" element={<RequireAdmin><ManageOrder></ManageOrder></RequireAdmin>}></Route>
+            <Route path="manageProducts" element={<RequireAdmin><ManageProduct></ManageProduct></RequireAdmin>}></Route>
+
+
           </Route>
           <Route path="*" element={<NotFound></NotFound>}></Route>
         </Routes>
         <Footer></Footer>
-      </Navbar>      
+      </Navbar>
     </div>
   );
 }
