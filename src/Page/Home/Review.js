@@ -15,7 +15,7 @@ const Review = ({ review }) => {
                         <h4 className="text-1xl">{review.name}</h4>
                     </div>
                 </div>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa perferendis sit assumenda, aspernatur iste voluptate.</p>
+                <p>{review?.description}</p>
                
             </div>
         </div>

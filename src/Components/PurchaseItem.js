@@ -23,18 +23,24 @@ const PurchaseItem = () => {
     }, [drill]);
     // console.log(drill)
     const onSubmit = data => {
-        
+
     }
 
     return (
         <div class="hero min-h-screen bg-base-200">
             <div class="hero-content flex-col lg:flex-row-reverse">
-                <div class="text-center lg:text-left">
-                    <h1 class="text-5xl font-bold">Purchase now!</h1>
-                    <h2 className="text-3xl font bold">Drill Name: {drill?.name}</h2>
-                    <p class=" text-1xl">Price: {drill?.price}</p>
-                    <p class=" text-1xl">Available Quantity: {drill?.quantity}</p>
-                    <p class="text-1xl">{drill?.desc}</p>
+                <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                    {/* <div class="text-center lg:text-left"> */}
+                    <div className="card-body">
+                        <img src={drill?.img} alt="" />
+                        <h1 class="text-5xl font-bold">Purchase now!</h1>
+                        <h2 className="text-3xl font bold">Drill Name: {drill?.name}</h2>
+                        <p class=" text-1xl">Price: {drill?.price}</p>
+                        <p class=" text-1xl">Available Quantity: {drill?.quantity}</p>
+                        <p class="text-1xl">{drill?.desc}</p>
+
+                   </div>
+                    {/* </div> */}
                 </div>
                 <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <form class="card-body" onSubmit={handleSubmit(onSubmit)}>
@@ -72,8 +78,6 @@ const PurchaseItem = () => {
                         {/* <p className="text-red-500">{error}</p> */}
                         <p className="text-red-500">{errors.orderAmount?.type === 'min' && "You have to at least buy 1"}</p>
                         <p className="text-red-500">{errors.orderAmount?.type === 'max' && `You can't buy more than ${drill.quantity}`}</p>
-                        
-
                         <div class="form-control mt-6">
                             <button class="btn btn-primary">Purchase</button>
                         </div>

@@ -6,7 +6,9 @@ import NotFound from './Components/NotFound';
 import PurchaseItem from './Components/PurchaseItem';
 import RequireAuth from './Components/RequireAuth';
 import Blog from './Page/Blog/Blog';
+import AddReview from './Page/Dashboard/AddReview';
 import Dashboard from './Page/Dashboard/Dashboard';
+import MyProfile from './Page/Dashboard/MyProfile';
 import Orders from './Page/Dashboard/Orders';
 import Home from './Page/Home/Home';
 import Register from './Page/Login/Register';
@@ -23,9 +25,9 @@ function App() {
           <Route path="/blog" element={<Blog></Blog>}></Route>
           <Route path="/purchase/:drillId" element={<RequireAuth><PurchaseItem></PurchaseItem></RequireAuth>}></Route>
           <Route path="/dashboard" element={<RequireAuth><Dashboard></Dashboard></RequireAuth>}>
-            <Route path="orders" element={<Orders></Orders>}></Route>
-            <Route path="review" element={<Orders></Orders>}></Route>
-            <Route path="profile" element={<Orders></Orders>}></Route>
+            <Route index element={<Orders></Orders>}></Route>
+            <Route path="review" element={<AddReview></AddReview>}></Route>
+            <Route path="profile" element={<MyProfile></MyProfile>}></Route>
           </Route>
           <Route path="*" element={<NotFound></NotFound>}></Route>
         </Routes>
