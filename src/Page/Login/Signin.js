@@ -27,7 +27,6 @@ const Signin = () => {
     const location = useLocation()
     let from = location.state?.from?.pathname || "/";
     if (gUser || user) {
-        console.log(gUser || user)
     }
     if (token) {
         // navigate(from, { replace: true });

@@ -22,7 +22,6 @@ const PurchaseItem = () => {
             });
 
     }, [drill]);
-    // console.log(drill)
     const onSubmit = data => {
         if (drill.quantity < 1) {
             toast.error("Out of Stock")
@@ -38,7 +37,6 @@ const PurchaseItem = () => {
                 productName: drill.name,
                 productPrice: Number(drill.price * data.orderAmount)
             }
-            console.log(purchase)
             fetch("http://localhost:5000/purchase", {
                 method: 'POST',
                 headers: {
@@ -74,7 +72,6 @@ const PurchaseItem = () => {
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                    {/* <div className="text-center lg:text-left"> */}
                     <div className="card-body">
                         <img src={drill?.img} alt="" />
                         <h1 className="text-5xl font-bold">Purchase now!</h1>

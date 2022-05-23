@@ -20,7 +20,6 @@ const Payment = () => {
     if (isLoading) {
         return <Loading></Loading>
     }
-    console.log(product)
     return (
         <div>
             <div class="card w-50 max-w-md bg-base-500 bg-base-200 my-12">

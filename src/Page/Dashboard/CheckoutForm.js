@@ -29,26 +29,29 @@ const CheckoutForm = ({ product }) => {
     }, [productPrice])
 
 
-    console.log(_id)
     const handleSubmit = async (event) => {
-        event.preventDefault()
+        event.preventDefault();
+
         if (!stripe || !elements) {
             return;
         }
 
         const card = elements.getElement(CardElement);
+
         if (card === null) {
             return;
         }
 
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
-            card,
+            card
         });
 
 
+
         setCardError(error?.message || '')
-        setSuccess("")
+        setSuccess('');
+        // confirm card payment
         const { paymentIntent, error: intentError } = await stripe.confirmCardPayment(
             clientSecret,
             {
@@ -61,18 +64,27 @@ const CheckoutForm = ({ product }) => {
                 },
             },
         );
+
         if (intentError) {
             setCardError(intentError?.message)
         } else {
-            setCardError("")
-            setTransactionId(paymentIntent.id)
-            setSuccess("Congrats! Your Payment was successful")
+            setCardError('');
+            setTransactionId(paymentIntent.id);
+            console.log(paymentIntent);
+            setSuccess('Congrats! Your payment is completed.')
+
+            //store payment on database
+            const payment = {
+                product: _id,
+                transactionId: paymentIntent.id
+            }
             fetch(`http://localhost:5000/payment/${_id}`, {
                 method: "PATCH",
                 headers: {
+                    "content-type": "application/json",
                     authorization: `Bearer ${localStorage.getItem("accessToken")}`
                 },
-                body: JSON.stringify({ productPrice })
+                body: JSON.stringify(payment)
             })
                 .then(res => res.json())
                 .then(data => console.log(data))

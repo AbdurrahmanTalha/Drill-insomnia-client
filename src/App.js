@@ -21,9 +21,14 @@ import ManageProduct from "./Page/Dashboard/ManageProduct"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Payment from './Page/Dashboard/Payment';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from './firebase.init';
+import useAdmin from './Hooks/useAdmin';
 
 
 function App() {
+  const [user] = useAuthState(auth);
+  const [admin] = useAdmin(user)
   return (
     <div>
       <Navbar>
@@ -34,7 +39,7 @@ function App() {
           <Route path="/blog" element={<Blog></Blog>}></Route>
           <Route path="/purchase/:drillId" element={<RequireAuth><PurchaseItem></PurchaseItem></RequireAuth>}></Route>
           <Route path="/dashboard" element={<RequireAuth><Dashboard></Dashboard></RequireAuth>}>
-            <Route index element={<Orders></Orders>}></Route>
+            <Route index={!admin} element={<Orders></Orders>}></Route>
             <Route path="review" element={<AddReview></AddReview>}></Route>
             <Route path="profile" element={<MyProfile></MyProfile>}></Route>
             <Route path="payment/:id" element={<Payment></Payment>}></Route>
