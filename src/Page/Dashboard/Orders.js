@@ -30,7 +30,6 @@ const Orders = () => {
                         <tr>
                             <th></th>
                             <th>Name</th>
-                            <th>Buyer</th>
                             <th>Phone</th>
                             <th>Amount Bought</th>
                             <th>Address</th>

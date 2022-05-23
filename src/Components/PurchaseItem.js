@@ -35,8 +35,10 @@ const PurchaseItem = () => {
                 orderAmount: data.orderAmount,
                 paid: false,
                 productId: drill._id,
-                productName: drill.name
+                productName: drill.name,
+                productPrice: Number(drill.price * data.orderAmount)
             }
+            console.log(purchase)
             fetch("http://localhost:5000/purchase", {
                 method: 'POST',
                 headers: {
