@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Review = ({ review }) => {
+    console.log(review)
     return (
         <div className="card lg:max-w-lg bg-base-100 shadow-xl">
             <div className="card-body">
@@ -11,7 +12,7 @@ const Review = ({ review }) => {
                         </div>
                     </div>
                     <div>
-                        <p className="text-2xl">Rating: {review.description}</p>
+                        <p className="text-2xl">Rating: {review.review}</p>
                         <h4 className="text-1xl">{review.name}</h4>
                     </div>
                 </div>

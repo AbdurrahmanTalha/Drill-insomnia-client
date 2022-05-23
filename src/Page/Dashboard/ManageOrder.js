@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
+import Loading from '../../Components/Loading';
 import DeletingConfirmOrderModal from './DeletingConfirmOrderModal';
 import ManageOrderRow from './ManageOrderRow';
 
@@ -6,6 +8,8 @@ import ManageOrderRow from './ManageOrderRow';
 const ManageOrder = () => {
     const [orders, setOrders] = useState([])
     const [deleteOrder, setDeleteOrder] = useState(null)
+
+  
     useEffect(() => {
         fetch("http://localhost:5000/orders", {
             method: "GET",
@@ -17,8 +21,7 @@ const ManageOrder = () => {
             .then(data => {
                 setOrders(data)
             })
-    }, [])
-
+    }, [orders]) 
 
 
     return (
@@ -40,12 +43,12 @@ const ManageOrder = () => {
                     <tbody>
                         {
                             orders.map((order, index) =>
-                                <ManageOrderRow key={order._id} order={order} setDeleteOrder={setDeleteOrder} index={index}></ManageOrderRow>)
+                                <ManageOrderRow key={order._id}  order={order} setDeleteOrder={setDeleteOrder} index={index}></ManageOrderRow>)
                         }
                     </tbody>
                 </table>
             </div>
-            {deleteOrder && <DeletingConfirmOrderModal deleteOrder={deleteOrder}></DeletingConfirmOrderModal>}
+            {deleteOrder && <DeletingConfirmOrderModal deleteOrder={deleteOrder}></DeletingConfirmOrderModal>} 
         </div>
     );
 };

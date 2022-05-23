@@ -9,7 +9,9 @@ const PurchaseItem = () => {
     const { drillId } = useParams()
     const [drill, setDrill] = useState();
     const [user, loading] = useAuthState(auth);
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors, isDirty, isValid} } = useForm({
+        mode: "onChange"
+    });
 
     const [error, setError] = useState("")
 
@@ -61,13 +63,14 @@ const PurchaseItem = () => {
                             .then(res => res.json())
                             .then(data => {
                                 toast.success(`Successfully Bought ${drill?.name}`)
+                                reset()
                             })
                     }
                 })
         }
 
     }
-
+    
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row-reverse">
@@ -78,6 +81,7 @@ const PurchaseItem = () => {
                         <h2 className="text-3xl font bold">Drill Name: {drill?.name}</h2>
                         <p className=" text-1xl">Price: {drill?.price}</p>
                         <p className=" text-1xl">Available Quantity: {drill?.quantity < 1 ? "Out of Stock" : drill?.quantity}</p>
+                        <p className="text-1xl">Minium Quantity: 1</p>
                         <p className="text-1xl">{drill?.desc}</p>
 
                     </div>
@@ -94,13 +98,16 @@ const PurchaseItem = () => {
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="text" readOnly {...register("buyerEmail", { required: true })} placeholder="Email" value={user.email} className="input  input-bordered" />
+                            <input type="text" readOnly {...register("buyerEmail", {
+                                required: true
+                            })} placeholder="Email" value={user.email} className="input  input-bordered" />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Phone</span>
                             </label>
-                            <input type="phone" placeholder="Phone"{...register("phone", { required: true })} className="input input-bordered" />
+                            <input type="phone" placeholder="Phone"{...register("phone", {
+                                required: true, pattern: /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[456789]\d{9}|(\d[ -]?){10}\d$/})} className="input input-bordered" />
                         </div>
 
                         <div className="form-control">
@@ -113,13 +120,14 @@ const PurchaseItem = () => {
                             <label className="label">
                                 <span className="label-text">Order amount</span>
                             </label>
-                            <input type="number"  {...register("orderAmount", { required: true, min: 1, max: drill?.quantity })} placeholder="Quantity" className="input input-bordered" />
+                            <input type="number" value={1}  {...register("orderAmount", { required: true, min: 1, max: drill?.quantity })} placeholder="Quantity" className="input input-bordered" />
                         </div>
                         {/* <p className="text-red-500">{error}</p> */}
                         <p className="text-red-500">{errors.orderAmount?.type === 'min' && "You have to at least buy 1"}</p>
+                        <p className="text-red-500">{errors.phone?.type === 'pattern' && "Invalid Phone Number"}</p>
                         <p className="text-red-500">{errors.orderAmount?.type === 'max' && `You can't buy more than ${drill.quantity}`}</p>
                         <div className="form-control mt-6">
-                            <button className="btn btn-primary">Purchase</button>
+                            <button className="btn btn-primary" disabled={!isValid || !isDirty}>Purchase</button>
                         </div>
                     </form>
                 </div>

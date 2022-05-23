@@ -27,9 +27,9 @@ const Signin = () => {
     const location = useLocation()
     let from = location.state?.from?.pathname || "/";
     if (gUser || user) {
+        navigate(from, { replace: true });
     }
     if (token) {
-        // navigate(from, { replace: true });
     }
     if (loading || gLoading) {
         return <Loading></Loading>

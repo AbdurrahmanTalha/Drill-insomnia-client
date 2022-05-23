@@ -24,6 +24,7 @@ import Payment from './Page/Dashboard/Payment';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from './firebase.init';
 import useAdmin from './Hooks/useAdmin';
+import MyPortfolio from './Page/MyPortfolio/MyPortfolio';
 
 
 function App() {
@@ -31,30 +32,31 @@ function App() {
   const [admin] = useAdmin(user)
   return (
     <div>
-      <Navbar>
-        <Routes>
-          <Route path="/" element={<Home></Home>}></Route>
-          <Route path="/login" element={<Signin></Signin>}></Route>
-          <Route path="/register" element={<Register></Register>}></Route>
-          <Route path="/blog" element={<Blog></Blog>}></Route>
-          <Route path="/purchase/:drillId" element={<RequireAuth><PurchaseItem></PurchaseItem></RequireAuth>}></Route>
-          <Route path="/dashboard" element={<RequireAuth><Dashboard></Dashboard></RequireAuth>}>
-            <Route index={!admin} element={<Orders></Orders>}></Route>
-            <Route path="review" element={<AddReview></AddReview>}></Route>
-            <Route path="profile" element={<MyProfile></MyProfile>}></Route>
-            <Route path="payment/:id" element={<Payment></Payment>}></Route>
-            <Route path="addProduct" element={<RequireAdmin><AddProduct></AddProduct></RequireAdmin>}></Route>
-            <Route path="admin" element={<RequireAdmin><MakeAdmin /></RequireAdmin>}></Route>
-            <Route path="allOrder" element={<RequireAdmin><ManageOrder></ManageOrder></RequireAdmin>}></Route>
-            <Route path="manageProducts" element={<RequireAdmin><ManageProduct></ManageProduct></RequireAdmin>}></Route>
+      <Navbar></Navbar>
+      <Routes>
+        <Route path="/" element={<Home></Home>}></Route>
+        <Route path="/login" element={<Signin></Signin>}></Route>
+        <Route path="/register" element={<Register></Register>}></Route>
+        <Route path="/blog" element={<Blog></Blog>}></Route>
+        <Route path="/purchase/:drillId" element={<RequireAuth><PurchaseItem></PurchaseItem></RequireAuth>}></Route>
 
+        <Route path="/dashboard" element={<RequireAuth><Dashboard></Dashboard></RequireAuth>}>
+          <Route index={!admin} element={<Orders></Orders>}></Route>
+          <Route path="review" element={<AddReview></AddReview>}></Route>
+          <Route path="profile" element={<MyProfile></MyProfile>}></Route>
+          <Route path="payment/:id" element={<Payment></Payment>}></Route>
+          <Route path="addProduct" element={<RequireAdmin><AddProduct></AddProduct></RequireAdmin>}></Route>
+          <Route path="admin" element={<RequireAdmin><MakeAdmin /></RequireAdmin>}></Route>
 
-          </Route>
-          <Route path="*" element={<NotFound></NotFound>}></Route>
-        </Routes>
-        <Footer></Footer>
-        <ToastContainer></ToastContainer>
-      </Navbar>
+          <Route path="allOrder" element={<RequireAdmin><ManageOrder></ManageOrder></RequireAdmin>}></Route>
+          <Route path="manageProducts" element={<RequireAdmin><ManageProduct></ManageProduct></RequireAdmin>}></Route>
+        </Route>
+          <Route path="portfolio" element={<MyPortfolio></MyPortfolio>}></Route>
+        <Route path="*" element={<NotFound></NotFound>}></Route>
+      </Routes>
+      <Footer></Footer>
+      <ToastContainer></ToastContainer>
+
     </div>
   );
 }

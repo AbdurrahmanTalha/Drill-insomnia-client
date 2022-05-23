@@ -2,7 +2,6 @@ import React from 'react';
 import { toast } from 'react-toastify';
 
 const DeletingConfirmOrderModal = ({ deleteOrder }) => {
-    console.log(deleteOrder)
     const { _id, productName } = deleteOrder
     const handleDeleteOrder = _id => {
         fetch(`http://localhost:5000/orders/${_id}`, {
