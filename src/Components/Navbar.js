@@ -11,6 +11,7 @@ const Navbar = ({ children }) => {
         await signOut(auth)
         localStorage.removeItem("accessToken")
     }
+    console.log(user)
     const menuItems = <>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/blog">Blog</Link></li>

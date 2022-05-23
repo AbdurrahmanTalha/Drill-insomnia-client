@@ -7,7 +7,7 @@ const ManageOrderRow = ({ order, index, setDeleteOrder }) => {
         fetch(`http://localhost:5000/pending/${_id}`, {
             method: "PUT",
             headers: {
-                authorization: `Bearer ${localStorage.getItem("accesstoken")}`
+                authorization: `Bearer ${localStorage.getItem("accessToken")}`
             }
         })
             .then(res => res.json()).then(data => console.log(data))

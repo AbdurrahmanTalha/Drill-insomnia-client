@@ -21,9 +21,10 @@ const Register = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const onSubmit = async data => {
+        console.log(data.phone)
         await createUserWithEmailAndPassword(data.email, data.password)
         await updateProfile({ displayName: data.name })
-    
+        console.log(user)
     }
     const handleGoogleSignin = () => {
         signInWithGoogle()
