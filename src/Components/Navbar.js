@@ -4,7 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../firebase.init';
 import { signOut } from 'firebase/auth';
 
-const Navbar = ({ children }) => {
+const Navbar = () => {
     const [user] = useAuthState(auth);
 
     const handleSignOut = async () => {

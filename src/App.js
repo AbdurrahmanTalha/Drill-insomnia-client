@@ -41,9 +41,9 @@ function App() {
         <Route path="/purchase/:drillId" element={<RequireAuth><PurchaseItem></PurchaseItem></RequireAuth>}></Route>
 
         <Route path="/dashboard" element={<RequireAuth><Dashboard></Dashboard></RequireAuth>}>
-          <Route index={!admin} element={<Orders></Orders>}></Route>
+          <Route path="myOrders" element={<Orders></Orders>}></Route>
           <Route path="review" element={<AddReview></AddReview>}></Route>
-          <Route path="profile" element={<MyProfile></MyProfile>}></Route>
+          <Route index element={<MyProfile></MyProfile>}></Route>
           <Route path="payment/:id" element={<Payment></Payment>}></Route>
           <Route path="addProduct" element={<RequireAdmin><AddProduct></AddProduct></RequireAdmin>}></Route>
           <Route path="admin" element={<RequireAdmin><MakeAdmin /></RequireAdmin>}></Route>
@@ -51,7 +51,7 @@ function App() {
           <Route path="allOrder" element={<RequireAdmin><ManageOrder></ManageOrder></RequireAdmin>}></Route>
           <Route path="manageProducts" element={<RequireAdmin><ManageProduct></ManageProduct></RequireAdmin>}></Route>
         </Route>
-          <Route path="portfolio" element={<MyPortfolio></MyPortfolio>}></Route>
+        <Route path="portfolio" element={<MyPortfolio></MyPortfolio>}></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>

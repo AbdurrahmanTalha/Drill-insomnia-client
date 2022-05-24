@@ -4,6 +4,7 @@ import Loading from '../../Components/Loading';
 import auth from '../../firebase.init';
 import { useQuery } from 'react-query';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 const MyProfile = () => {
 
@@ -21,7 +22,8 @@ const MyProfile = () => {
         return <Loading></Loading>;
     }
     // console.log(usersDB)
-    const onSubmit = data => {
+    const onSubmit = async data => {
+        await updateProfile({displayName: data.name})
         const changes = {
             education: data.education,
             linkedIn: data.linkedIn,
@@ -37,20 +39,23 @@ const MyProfile = () => {
             body: JSON.stringify(changes)
         })
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data => {
+                if (data.modifiedCount > 1 || data.modifiedCount === 1) {
+                    toast.success("Successfully Edited My Profile Might need to reload to check changes")
+                }
+            })
         console.log(data)
     }
     // console.log(user)
     return (
         <div className="container">
             <h2>My profile</h2>
-
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-control w-full max-w-xs">
                     <label className="label">
                         <span className="label-text">Name</span>
                     </label>
-                    <input type="text" defaultValue={user.displayName} className="input input-bordered w-full max-w-xs" />
+                    <input type="text" defaultValue={user.displayName} {...register("name")} className="input input-bordered w-full max-w-xs" />
                 </div>
                 <div className="form-control w-full max-w-xs">
                     <label className="label">
