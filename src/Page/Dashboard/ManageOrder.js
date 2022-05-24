@@ -11,7 +11,7 @@ const ManageOrder = () => {
 
 
     useEffect(() => {
-        fetch("http://localhost:5000/orders", {
+        fetch("https://shrouded-mesa-73405.herokuapp.com/orders", {
             method: "GET",
             headers: {
                 authorization: `Bearer ${localStorage.getItem("accessToken")}`

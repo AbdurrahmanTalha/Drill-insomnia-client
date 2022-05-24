@@ -5,7 +5,7 @@ import ProductItem from './ProductItem';
 import DeletingConfirmModal from "./DeletingConfirmProductModal"
 const ManageProduct = () => {
     const [deletingProduct, setDeletingProduct] = useState(null)
-    const { data: products, isLoading, refetch } = useQuery('product', () => fetch("http://localhost:5000/tools", {
+    const { data: products, isLoading, refetch } = useQuery('product', () => fetch("https://shrouded-mesa-73405.herokuapp.com/tools", {
         method: "GET",
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`

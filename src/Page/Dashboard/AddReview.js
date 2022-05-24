@@ -8,7 +8,7 @@ const AddReview = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
     const [user] = useAuthState(auth)
     const onSubmit = (data, event) => {
-        fetch("http://localhost:5000/rating", {
+        fetch("https://shrouded-mesa-73405.herokuapp.com/rating", {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -16,7 +16,7 @@ const PurchaseItem = () => {
     const [error, setError] = useState("")
 
     useEffect(() => {
-        const url = `http://localhost:5000/item/${drillId}`;
+        const url = `https://shrouded-mesa-73405.herokuapp.com/item/${drillId}`;
         fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -39,7 +39,7 @@ const PurchaseItem = () => {
                 productName: drill.name,
                 productPrice: Number(drill.price * data.orderAmount)
             }
-            fetch("http://localhost:5000/purchase", {
+            fetch("https://shrouded-mesa-73405.herokuapp.com/purchase", {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -52,7 +52,7 @@ const PurchaseItem = () => {
                     if (tool.success) {
                         const quantity = drill.quantity - data.orderAmount;
                         const updatedQuantity = { quantity };
-                        const url = `http://localhost:5000/drill/${drill._id}`;
+                        const url = `https://shrouded-mesa-73405.herokuapp.com/drill/${drill._id}`;
                         fetch(url, {
                             method: 'PUT',
                             headers: {

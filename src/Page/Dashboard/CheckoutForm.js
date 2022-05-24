@@ -12,7 +12,7 @@ const CheckoutForm = ({ product }) => {
 
     const { productPrice, buyer, buyerEmail, _id } = product;
     useEffect(() => {
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://shrouded-mesa-73405.herokuapp.com/create-payment-intent", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -78,7 +78,7 @@ const CheckoutForm = ({ product }) => {
                 product: _id,
                 transactionId: paymentIntent.id
             }
-            fetch(`http://localhost:5000/payment/${_id}`, {
+            fetch(`https://shrouded-mesa-73405.herokuapp.com/payment/${_id}`, {
                 method: "PATCH",
                 headers: {
                     "content-type": "application/json",

@@ -3,7 +3,7 @@ import React from 'react';
 const DeletingConfirmProductModal = ({ deletingProduct, refetch }) => {
     const { name, _id } = deletingProduct;
     const handleProductDelete = _id => {
-        fetch(`http://localhost:5000/product/${_id}`, {
+        fetch(`https://shrouded-mesa-73405.herokuapp.com/product/${_id}`, {
             method: "DELETE",
             headers: {
                 authorization: `Bearer ${localStorage.getItem("accessToken")}`
