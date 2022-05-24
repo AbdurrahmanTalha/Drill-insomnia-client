@@ -24,10 +24,10 @@ const AdminRow = ({ user, refetch, index }) => {
     }
     return (
         <tr>
-            <th>{index+1}</th>
+            <th>{index + 1}</th>
             <td>{email}</td>
             <td>{role !== "admin" && <button onClick={handleMakeAdmin} className="btn btn-xs">Make ADMIN</button>}</td>
-            
+
         </tr>
     );
 };

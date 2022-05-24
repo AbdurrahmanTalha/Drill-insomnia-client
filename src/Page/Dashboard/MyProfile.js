@@ -23,7 +23,7 @@ const MyProfile = () => {
     }
     // console.log(usersDB)
     const onSubmit = async data => {
-        await updateProfile({displayName: data.name})
+        await updateProfile({ displayName: data.name })
         const changes = {
             education: data.education,
             linkedIn: data.linkedIn,

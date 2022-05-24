@@ -24,16 +24,16 @@ const ManageOrderRow = ({ order, index, setDeleteOrder }) => {
             <td>
                 {
                     !order.paid ?
-                    <>
-                        <button className="btn">Unpaid</button>
-                        <label htmlFor="deleting-confirm-2" className="btn ml-2" onClick={() => setDeleteOrder(order)} >DELETE</label>
+                        <>
+                            <button className="btn">Unpaid</button>
+                            <label htmlFor="deleting-confirm-2" className="btn ml-2" onClick={() => setDeleteOrder(order)} >DELETE</label>
                         </>
                         : order.pending ? <button className="btn" onClick={() => updatePending(order._id)}>Pending</button> : <button className="btn">Shipped</button>
                 }
                 {
-                    
+
                 }
-                
+
             </td>
         </tr>
     );

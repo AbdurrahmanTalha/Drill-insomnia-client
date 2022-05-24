@@ -11,7 +11,7 @@ const useToken = (user) => {
             education: "None added",
             location: "None added",
             phoneNumber: "None added",
-            linkedIn: "None added",   
+            linkedIn: "None added",
         }
         if (email) {
             fetch(`http://localhost:5000/user/${email}`, {

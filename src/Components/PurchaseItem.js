@@ -9,7 +9,7 @@ const PurchaseItem = () => {
     const { drillId } = useParams()
     const [drill, setDrill] = useState();
     const [user, loading] = useAuthState(auth);
-    const { register, handleSubmit, reset, formState: { errors, isDirty, isValid} } = useForm({
+    const { register, handleSubmit, reset, formState: { errors, isDirty, isValid } } = useForm({
         mode: "onChange"
     });
 
@@ -70,7 +70,7 @@ const PurchaseItem = () => {
         }
 
     }
-    
+
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row-reverse">
@@ -107,7 +107,8 @@ const PurchaseItem = () => {
                                 <span className="label-text">Phone</span>
                             </label>
                             <input type="phone" placeholder="Phone"{...register("phone", {
-                                required: true, pattern: /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[456789]\d{9}|(\d[ -]?){10}\d$/})} className="input input-bordered" />
+                                required: true, pattern: /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[456789]\d{9}|(\d[ -]?){10}\d$/
+                            })} className="input input-bordered" />
                         </div>
 
                         <div className="form-control">
