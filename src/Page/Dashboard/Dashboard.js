@@ -9,15 +9,15 @@ const Dashboard = () => {
     const [admin] = useAdmin(user)
 
     return (
-        <div className="drawer drawer-mobile z-20" >
+        <div className="drawer drawer-mobile ">
             <input id="sidebar-dashboard" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex flex-col ">
-                <h2 className="text-3xl font-bold text-purple-500">Dashboard</h2>
+            <div className="drawer-content">
+                <h2 className="text-2xl font-bold text-purple-400 p-5">Dashboard</h2>
                 <Outlet></Outlet>
             </div>
             <div className="drawer-side">
                 <label htmlFor="sidebar-dashboard" className="drawer-overlay"></label>
-                <ul className="menu p-4 overflow-y-auto w-48 bg-base-100 text-base-content">
+                <ul className="menu p-4 z-50 overflow-y-auto w-64 bg-base-200 gap-y-2 text-base-content">
                     {!admin && <>
                         <li><Link to="/dashboard/myOrders">My Orders</Link></li>
                         <li><Link to="/dashboard/review">Add a Reviews</Link></li>
@@ -30,7 +30,6 @@ const Dashboard = () => {
                         <li><Link to="/dashboard/manageProducts">Manage Products</Link></li>
                     </>}
                 </ul>
-
             </div>
         </div >
     );

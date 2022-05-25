@@ -11,7 +11,8 @@ const AddReview = () => {
         fetch("https://shrouded-mesa-73405.herokuapp.com/rating", {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem("accessToken")}`
             },
             body: JSON.stringify(data)
         })

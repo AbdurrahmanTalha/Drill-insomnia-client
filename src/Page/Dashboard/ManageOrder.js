@@ -42,7 +42,7 @@ const ManageOrder = () => {
                     </thead>
                     <tbody>
                         {
-                            orders.map((order, index) =>
+                            orders?.map((order, index) =>
                                 <ManageOrderRow key={order._id} order={order} setDeleteOrder={setDeleteOrder} index={index}></ManageOrderRow>)
                         }
                     </tbody>

@@ -12,7 +12,7 @@ const MyProfile = () => {
     const [updateProfile, updating, error] = useUpdateProfile(auth);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const { data: usersDB, isLoading, refetch } = useQuery('users', () => fetch(`https://shrouded-mesa-73405.herokuapp.com/user/${user.email}`, {
+    const { data: usersDB, isLoading, refetch } = useQuery('users', () => fetch(`http://localhost:5000/user/${user.email}`, {
         method: "GET",
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`

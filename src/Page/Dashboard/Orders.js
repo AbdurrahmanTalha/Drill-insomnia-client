@@ -3,10 +3,14 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import OrderRow from './OrderRow';
 import DeletingConfirmOrderModal from './DeletingConfirmOrderModal';
-
+import {
+    useLocation, useNavigate
+} from "react-router-dom";
+import useAdmin from "../../Hooks/useAdmin"
 const Orders = () => {
     const [user] = useAuthState(auth)
     const [orders, setOrders] = useState([])
+    const [admin] = useAdmin(user)
     const [deleteOrder, setDeleteOrder] = useState(null)
     useEffect(() => {
         const getOrders = () => {
@@ -21,6 +25,12 @@ const Orders = () => {
         }
         getOrders();
     }, [orders])
+    const location = useLocation()
+    const navigate = useNavigate()
+    if (admin && location.pathname === "/dashboard/myOrders") {
+        navigate("/dashboard/")
+    }
+    console.log(location)
     return (
         <div>
             <h2>This is orders</h2>

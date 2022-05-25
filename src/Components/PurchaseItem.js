@@ -24,6 +24,7 @@ const PurchaseItem = () => {
             });
 
     }, [drill]);
+    console.log(drill)
     const onSubmit = data => {
         if (drill.quantity < 1) {
             toast.error("Out of Stock")
@@ -121,7 +122,7 @@ const PurchaseItem = () => {
                             <label className="label">
                                 <span className="label-text">Order amount</span>
                             </label>
-                            <input type="number" value={1}  {...register("orderAmount", { required: true, min: 1, max: drill?.quantity })} placeholder="Quantity" className="input input-bordered" />
+                            <input type="number" defaultValue={1}  {...register("orderAmount", { required: true, min: 1, max: drill?.quantity })} placeholder="Quantity" className="input input-bordered" />
                         </div>
                         {/* <p className="text-red-500">{error}</p> */}
                         <p className="text-red-500">{errors.orderAmount?.type === 'min' && "You have to at least buy 1"}</p>

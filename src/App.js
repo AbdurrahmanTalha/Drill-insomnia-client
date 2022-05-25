@@ -32,8 +32,7 @@ function App() {
   const [admin] = useAdmin(user)
   return (
     <div>
-      <Navbar></Navbar>
-      <Routes>
+      <Navbar><Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/login" element={<Signin></Signin>}></Route>
         <Route path="/register" element={<Register></Register>}></Route>
@@ -54,8 +53,10 @@ function App() {
         <Route path="portfolio" element={<MyPortfolio></MyPortfolio>}></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
-      <Footer></Footer>
-      <ToastContainer></ToastContainer>
+        <Footer></Footer>
+        <ToastContainer></ToastContainer>
+      </Navbar>
+
 
     </div>
   );
