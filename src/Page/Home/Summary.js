@@ -4,8 +4,10 @@ const Summary = () => {
     return (
         <div className="flex justify-center align-middle">
             <div>
-                <h2 className="text-3xl text-center mb-5">Business Summary</h2>
-                <div className="stats stats-vertical lg:stats-horizontal shadow">
+                <div className="divider"></div>
+                <h2 className='text-center text-3xl font-bold'>BUSINESS SUMMARY</h2>
+                <div className="divider"></div>
+                <div className="stats my-10 stats-vertical lg:stats-horizontal shadow">
                     <div className="stat border-sky-500">
                         <div className="stat-title text-2xl">Served</div>
                         <div className="stat-value">100+</div>

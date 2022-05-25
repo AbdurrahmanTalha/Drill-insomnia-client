@@ -21,7 +21,7 @@ const DeletingConfirmOrderModal = ({ deleteOrder }) => {
                     <h3 className="font-bold text-lg">Are you sure you want to delete {productName}</h3>
                     <p className="py-4" > You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
                     <div className="modal-action" >
-                        <label htmlFor="deleting-confirm-2" onClick={() => handleDeleteOrder(_id)} className="btn modal-button">Delete</label>
+                        <label htmlFor="deleting-confirm-2" onClick={() => handleDeleteOrder(_id)} className="btn modal-button bg-red-500">Delete</label>
                         <label htmlFor="deleting-confirm-2" className="btn">Cancel</label>
                     </div >
                 </div >

@@ -1,6 +1,8 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { success } from 'daisyui/src/colors';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Loading from '../../Components/Loading';
 
 const CheckoutForm = ({ product }) => {
     const stripe = useStripe()
@@ -9,9 +11,11 @@ const CheckoutForm = ({ product }) => {
     const [cardSuccess, setSuccess] = useState('')
     const [clientSecret, setClientSecret] = useState('')
     const [transactionId, setTransactionId] = useState('')
-
+    const [loading, setLoading] = useState(false)
     const { productPrice, buyer, buyerEmail, _id } = product;
+    const navigate = useNavigate()
     useEffect(() => {
+        setLoading(true)
         fetch("https://shrouded-mesa-73405.herokuapp.com/create-payment-intent", {
             method: "POST",
             headers: {
@@ -24,11 +28,15 @@ const CheckoutForm = ({ product }) => {
             .then(data => {
                 if (data?.clientSecret) {
                     setClientSecret(data.clientSecret)
+                    setLoading(false)
+                    navigate('/dashboard/myOrders')
                 }
             })
     }, [productPrice])
 
-
+    if (loading) {
+        return <Loading></Loading>
+    }
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -66,8 +74,10 @@ const CheckoutForm = ({ product }) => {
         );
 
         if (intentError) {
+            setLoading(false)
             setCardError(intentError?.message)
         } else {
+            setLoading(true)
             setCardError('');
             setTransactionId(paymentIntent.id);
             console.log(paymentIntent);
@@ -87,7 +97,10 @@ const CheckoutForm = ({ product }) => {
                 body: JSON.stringify(payment)
             })
                 .then(res => res.json())
-                .then(data => console.log(data))
+                .then(data => {
+                    console.log(data)
+                    setLoading(false)
+                })
         }
     }
     return (

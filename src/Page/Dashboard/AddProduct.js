@@ -21,7 +21,7 @@ const AddProduct = () => {
     }
     return (
         <div>
-            <h2>Add Product</h2>
+            <h2 className="text-2xl font-bold pl-6">Add a Product</h2>
             <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-control">
                     <label className="label">

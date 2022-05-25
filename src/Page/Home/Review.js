@@ -16,7 +16,6 @@ const Review = ({ review }) => {
                     </div>
                 </div>
                 <p>{review?.description}</p>
-               
             </div>
         </div>
     );

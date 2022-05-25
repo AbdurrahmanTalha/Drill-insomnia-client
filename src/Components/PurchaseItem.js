@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import auth from '../firebase.init';
 
 import { toast } from 'react-toastify';
@@ -12,6 +12,8 @@ const PurchaseItem = () => {
     const { register, handleSubmit, reset, formState: { errors, isDirty, isValid } } = useForm({
         mode: "onChange"
     });
+
+    const navigate = useNavigate();
 
     const [error, setError] = useState("")
 
@@ -63,8 +65,9 @@ const PurchaseItem = () => {
                         })
                             .then(res => res.json())
                             .then(data => {
-                                toast.success(`Successfully Bought ${drill?.name}`)
-                                reset()
+                                toast.success(`Successfully Bought ${drill?.name}`);
+                                reset();
+                                navigate('/dashboard/myOrders')
                             })
                     }
                 })
@@ -110,6 +113,7 @@ const PurchaseItem = () => {
                             <input type="phone" placeholder="Phone"{...register("phone", {
                                 required: true, pattern: /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[456789]\d{9}|(\d[ -]?){10}\d$/
                             })} className="input input-bordered" />
+                            <p className="text-red-500">{errors.phone?.type === 'pattern' && "Invalid Phone Number"}</p>
                         </div>
 
                         <div className="form-control">
@@ -117,17 +121,18 @@ const PurchaseItem = () => {
                                 <span className="label-text">Address</span>
                             </label>
                             <input type="text"  {...register("buyerAddress", { required: true })} placeholder="Address" className="input input-bordered" />
+                            <p className="text-red-500">{errors.buyerAddress?.type === 'required' && 'Address is required'}</p>
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Order amount</span>
                             </label>
                             <input type="number" defaultValue={1}  {...register("orderAmount", { required: true, min: 1, max: drill?.quantity })} placeholder="Quantity" className="input input-bordered" />
+                            <p className="text-red-500">{errors.orderAmount?.type === 'min' && "You have to at least buy 1"}</p>
+                            <p className="text-red-500">{errors.orderAmount?.type === 'max' && `You can't buy more than ${drill.quantity}`}</p>
+                            <p className="text-red-500">{errors.orderAmount?.type === 'required' && 'Order Amount is required'}</p>
                         </div>
-                        {/* <p className="text-red-500">{error}</p> */}
-                        <p className="text-red-500">{errors.orderAmount?.type === 'min' && "You have to at least buy 1"}</p>
-                        <p className="text-red-500">{errors.phone?.type === 'pattern' && "Invalid Phone Number"}</p>
-                        <p className="text-red-500">{errors.orderAmount?.type === 'max' && `You can't buy more than ${drill.quantity}`}</p>
+                       
                         <div className="form-control mt-6">
                             <button className="btn btn-primary" disabled={!isValid || !isDirty}>Purchase</button>
                         </div>

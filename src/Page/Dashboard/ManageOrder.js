@@ -22,19 +22,28 @@ const ManageOrder = () => {
                 setOrders(data)
             })
     }, [orders])
-
+    const updatePending = (_id) => {
+        console.log(_id)
+        fetch(`https://shrouded-mesa-73405.herokuapp.com/pending/${_id}`, {
+            method: "PUT",
+            headers: {
+                authorization: `Bearer ${localStorage.getItem("accessToken")}`
+            }
+        })
+            .then(res => res.json()).then(data => console.log(data))
+    }
 
     return (
-        <div>
-            <h2>This is Manage Orders</h2>
+         <div className="mb-10">
+            <h2 className="text-2xl font-bold pl-6">Manage Orders</h2>
             <div className="overflow-x-auto">
-                <table className="table w-full">
+                <table className="md:table lg:table w-full">
                     <thead>
                         <tr>
                             <th></th>
                             <th>Name</th>
                             <th>Phone</th>
-                            <th>Amount Buyed</th>
+                            <th>Amount Bought</th>
                             <th>Address</th>
                             <th>Product</th>
                             <th>Action</th>
@@ -43,13 +52,31 @@ const ManageOrder = () => {
                     <tbody>
                         {
                             orders?.map((order, index) =>
-                                <ManageOrderRow key={order._id} order={order} setDeleteOrder={setDeleteOrder} index={index}></ManageOrderRow>)
+                                <tr className="overflow-x-auto">
+                                    <th>{index + 1}</th>
+                                    <td>{order.buyer}</td>
+                                    <td>{order.phone}</td>
+                                    <td>{order.orderAmount}</td>
+                                    <td>{order.buyerAddress}</td>
+                                    <td>{order.productName}</td>
+                                    <td className='flex'>
+                                        {
+                                            !order.paid ?
+                                                <>
+                                                    <button className="text-red-500 btn-ghost">UNPAID</button>
+                                                    <label htmlFor="deleting-confirm-2" className="btn ml-2 bg-red-500 border-0" onClick={() => setDeleteOrder(order)}>DELETE</label>
+                                                </>
+                                                : order.pending ? <button className="btn btn-primary btn-md" onClick={() => updatePending(order._id)}>PENDING...</button> : <p className="text-green-700">SHIPPED</p>
+                                        }
+                                    </td>
+                                </tr>)
                         }
                     </tbody>
                 </table>
             </div>
             {deleteOrder && <DeletingConfirmOrderModal deleteOrder={deleteOrder}></DeletingConfirmOrderModal>}
-        </div>
+        </div> 
+        
     );
 };
 

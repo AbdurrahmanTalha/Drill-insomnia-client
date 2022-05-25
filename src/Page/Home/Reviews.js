@@ -1,18 +1,22 @@
 import React from 'react';
 import { useQuery } from 'react-query';
+import Loading from '../../Components/Loading';
 import Review from './Review';
 
 const Reviews = () => {
 
-    const { isLoading, data: reviews } = useQuery("review", () => fetch("http://localhost:5000/rating", ).then(res => res.json())
+    const { isLoading, data: reviews, refetch } = useQuery("review", () => fetch("https://shrouded-mesa-73405.herokuapp.com/rating",).then(res => res.json())
     )
     if (isLoading) {
-        return <p>Loading...</p>
+        return <Loading></Loading>;
     }
+    refetch()
     return (
         <div className="my-5 p-5">
-            <h2 className="text-center text-3xl">Reviews</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
+            <div className="divider"></div>
+            <h2 className='text-center text-3xl font-bold'>WHAT CUSTOMERS SAY</h2>
+            <div className="divider"></div>
+            <div className="grid grid-cols-1 my-10 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
                 {
                     reviews?.map(review => <Review review={review} key={review._id}></Review>)
                 }

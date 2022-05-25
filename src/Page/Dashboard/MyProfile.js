@@ -12,7 +12,7 @@ const MyProfile = () => {
     const [updateProfile, updating, error] = useUpdateProfile(auth);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const { data: usersDB, isLoading, refetch } = useQuery('users', () => fetch(`http://localhost:5000/user/${user.email}`, {
+    const { data: usersDB, isLoading, refetch } = useQuery('users', () => fetch(`https://shrouded-mesa-73405.herokuapp.com/user/${user.email}`, {
         method: "GET",
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -50,41 +50,43 @@ const MyProfile = () => {
     // console.log(user)
     return (
         <div className="container">
-            <h2>My profile</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="form-control w-full max-w-xs">
-                    <label className="label">
-                        <span className="label-text">Name</span>
-                    </label>
-                    <input type="text" defaultValue={user.displayName} {...register("name")} className="input input-bordered w-full max-w-xs" />
-                </div>
-                <div className="form-control w-full max-w-xs">
-                    <label className="label">
-                        <span className="label-text">Education</span>
-                    </label>
-                    <input type="text" defaultValue={usersDB.education}  {...register("education")} className="input input-bordered w-full max-w-xs" />
-                </div>
-                <div className="form-control w-full max-w-xs">
-                    <label className="label">
-                        <span className="label-text">Phone Number</span>
-                    </label>
-                    <input type="text" defaultValue={usersDB.phoneNumber}  {...register("phoneNumber")} className="input input-bordered w-full max-w-xs" />
-                </div>
-                <div className="form-control w-full max-w-xs">
-                    <label className="label">
-                        <span className="label-text">Linked In</span>
-                    </label>
-                    <input type="text" defaultValue={usersDB.linkedIn}  {...register("linkedIn")} className="input input-bordered w-full max-w-xs" />
-                </div>
-                <div className="form-control w-full max-w-xs">
-                    <label className="label">
-                        <span className="label-text">Location</span>
-                    </label>
-                    <input type="text" defaultValue={usersDB.location}  {...register("location")} className="input input-bordered w-full max-w-xs" />
-                </div>
+            <div>
+                <h2 className="text-2xl font-bold pl-6">My Profile</h2>
+                <form onSubmit={handleSubmit(onSubmit)} className="p-5">
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                            <span className="label-text">Name</span>
+                        </label>
+                        <input type="text" defaultValue={user.displayName} {...register("name")} className="input input-bordered w-full max-w-xs" />
+                    </div>
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                            <span className="label-text">Education</span>
+                        </label>
+                        <input type="text" defaultValue={usersDB.education}  {...register("education")} className="input input-bordered w-full max-w-xs" />
+                    </div>
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                            <span className="label-text">Phone Number</span>
+                        </label>
+                        <input type="text" defaultValue={usersDB.phoneNumber}  {...register("phoneNumber")} className="input input-bordered w-full max-w-xs" />
+                    </div>
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                            <span className="label-text">Linked In</span>
+                        </label>
+                        <input type="text" defaultValue={usersDB.linkedIn}  {...register("linkedIn")} className="input input-bordered w-full max-w-xs" />
+                    </div>
+                    <div className="form-control w-full max-w-xs mb-5">
+                        <label className="label">
+                            <span className="label-text">Location</span>
+                        </label>
+                        <input type="text" defaultValue={usersDB.location}  {...register("location")} className="input input-bordered w-full max-w-xs" />
+                    </div>
 
-                <button className="btn" type="submit">Save</button>
-            </form>
+                    <button className="btn w-7/12" type="submit">Save</button>
+                </form>
+            </div>
         </div>
     );
 };

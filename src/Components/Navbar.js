@@ -23,7 +23,7 @@ const Navbar = ({children}) => {
         {
             user ? <>
                 <li><button onClick={handleSignOut} className="btn text-white">Logout</button></li>
-                <div className="btn ml-2">{user?.displayName}</div>
+                <div className="btn ml-2 mt-2 lg:mt-0 md:mt-0">{user?.displayName}</div>
             </> : <li><Link to="/login" className="btn text-white">Login</Link></li>
         }
     </>
@@ -33,14 +33,15 @@ const Navbar = ({children}) => {
             <div className="drawer-content flex flex-col">
                 {/* <!-- Navbar --> */}
                 <div className="w-full navbar lg:px-10">
-                    <div className="flex-none z-50 lg:hidden">
-                        <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
+                    <div className="flex-none z-index-50 lg:hidden">
+                        <label htmlFor="sidebar-dashboard" className="btn btn-square btn-ghost">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                         </label>
                     </div>
-                    <div className="flex-1 px-2 mx-2 text-3xl">Drill Insomnia</div>
-                    <div className="flex-none z-index-50 lg:hidden">
-                        <label htmlFor="sidebar-dashboard" className="btn btn-square btn-ghost">
+                    <Link to='/' className="flex-1 px-2 mx-2 text-3xl">Drill Insomnia</Link>
+                    
+                    <div className="flex-none z-50 lg:hidden">
+                        <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                         </label>
                     </div>

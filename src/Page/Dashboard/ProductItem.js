@@ -9,7 +9,7 @@ const ProductItem = ({ product, setDeletingProduct }) => {
             <td>{product.price}</td>
             <td>{product.quantity}</td>
             <td>
-                <label htmlFor="deleting-confirm" onClick={() => setDeletingProduct(product)} className="btn modal-button">Delete</label>
+                <label htmlFor="deleting-confirm" onClick={() => setDeletingProduct(product)} className="btn modal-button btn-md bg-red-500 border-0">Delete</label>
             </td>
         </tr>
     );

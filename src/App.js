@@ -29,7 +29,6 @@ import MyPortfolio from './Page/MyPortfolio/MyPortfolio';
 
 function App() {
   const [user] = useAuthState(auth);
-  const [admin] = useAdmin(user)
   return (
     <div>
       <Navbar><Routes>
@@ -38,7 +37,6 @@ function App() {
         <Route path="/register" element={<Register></Register>}></Route>
         <Route path="/blog" element={<Blog></Blog>}></Route>
         <Route path="/purchase/:drillId" element={<RequireAuth><PurchaseItem></PurchaseItem></RequireAuth>}></Route>
-
         <Route path="/dashboard" element={<RequireAuth><Dashboard></Dashboard></RequireAuth>}>
           <Route path="myOrders" element={<Orders></Orders>}></Route>
           <Route path="review" element={<AddReview></AddReview>}></Route>
@@ -53,11 +51,8 @@ function App() {
         <Route path="portfolio" element={<MyPortfolio></MyPortfolio>}></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
-        <Footer></Footer>
         <ToastContainer></ToastContainer>
       </Navbar>
-
-
     </div>
   );
 }

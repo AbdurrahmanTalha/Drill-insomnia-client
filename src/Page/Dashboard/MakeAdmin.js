@@ -4,7 +4,7 @@ import Loading from '../../Components/Loading';
 import AdminRow from './AdminRow';
 
 const MakeAdmin = () => {
-    const { data: users, isLoading, refetch } = useQuery('users', () => fetch("https://shrouded-mesa-73405.herokuapp.com/user", {
+    const { data: users, isLoading, refetch } = useQuery('user', () => fetch("https://shrouded-mesa-73405.herokuapp.com/user", {
         method: "GET",
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -13,9 +13,10 @@ const MakeAdmin = () => {
     if (isLoading) {
         return <Loading></Loading>
     }
+    refetch()
     return (
         <div>
-            <h2>This is make admin</h2>
+            <h2 className="text-2xl font-bold pl-6">Make An Admin</h2>
             <table className="table w-full">
                 <thead>
                     <tr>

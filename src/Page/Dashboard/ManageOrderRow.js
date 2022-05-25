@@ -14,26 +14,22 @@ const ManageOrderRow = ({ order, index, setDeleteOrder }) => {
     }
 
     return (
-        <tr>
+        <tr className="overflow-x-auto">
             <th>{index + 1}</th>
-            <th>{order.buyer}</th>
+            <td>{order.buyer}</td>
             <td>{order.phone}</td>
             <td>{order.orderAmount}</td>
             <td>{order.buyerAddress}</td>
             <td>{order.productName}</td>
-            <td>
+            <td className='flex'>
                 {
                     !order.paid ?
                         <>
-                            <button className="btn">Unpaid</button>
-                            <label htmlFor="deleting-confirm-2" className="btn ml-2" onClick={() => setDeleteOrder(order)} >DELETE</label>
+                            <button className="text-red-500 btn-ghost">UNPAID</button>
+                            <label htmlFor="deleting-confirm-2" className="btn ml-2 bg-red-500 border-0" onClick={() => setDeleteOrder(order)}>DELETE</label>
                         </>
-                        : order.pending ? <button className="btn" onClick={() => updatePending(order._id)}>Pending</button> : <button className="btn">Shipped</button>
+                        : order.pending ? <button className="btn btn-primary btn-md" onClick={() => updatePending(order._id)}>PENDING...</button> : <p className="text-green-700">SHIPPED</p>
                 }
-                {
-
-                }
-
             </td>
         </tr>
     );
