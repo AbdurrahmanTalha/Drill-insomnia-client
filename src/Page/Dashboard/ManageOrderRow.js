@@ -4,7 +4,7 @@ const ManageOrderRow = ({ order, index, setDeleteOrder }) => {
 
     const updatePending = (_id) => {
         console.log(_id)
-        fetch(`https://shrouded-mesa-73405.herokuapp.com/pending/${_id}`, {
+        fetch(`https://drill-insomnia-server.onrender.com/pending/${_id}`, {
             method: "PUT",
             headers: {
                 authorization: `Bearer ${localStorage.getItem("accessToken")}`

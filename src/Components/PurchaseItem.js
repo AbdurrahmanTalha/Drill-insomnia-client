@@ -18,7 +18,7 @@ const PurchaseItem = () => {
     const [error, setError] = useState("")
 
     useEffect(() => {
-        const url = `https://shrouded-mesa-73405.herokuapp.com/item/${drillId}`;
+        const url = `https://drill-insomnia-server.onrender.com/item/${drillId}`;
         fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -42,7 +42,7 @@ const PurchaseItem = () => {
                 productName: drill.name,
                 productPrice: Number(drill.price * data.orderAmount)
             }
-            fetch("https://shrouded-mesa-73405.herokuapp.com/purchase", {
+            fetch("https://drill-insomnia-server.onrender.com/purchase", {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -55,7 +55,7 @@ const PurchaseItem = () => {
                     if (tool.success) {
                         const quantity = drill.quantity - data.orderAmount;
                         const updatedQuantity = { quantity };
-                        const url = `https://shrouded-mesa-73405.herokuapp.com/drill/${drill._id}`;
+                        const url = `https://drill-insomnia-server.onrender.com/drill/${drill._id}`;
                         fetch(url, {
                             method: 'PUT',
                             headers: {
@@ -132,7 +132,7 @@ const PurchaseItem = () => {
                             <p className="text-red-500">{errors.orderAmount?.type === 'max' && `You can't buy more than ${drill.quantity}`}</p>
                             <p className="text-red-500">{errors.orderAmount?.type === 'required' && 'Order Amount is required'}</p>
                         </div>
-                       
+
                         <div className="form-control mt-6">
                             <button className="btn btn-primary" disabled={!isValid || !isDirty}>Purchase</button>
                         </div>

@@ -3,7 +3,7 @@ import Tool from './Tool';
 import { useQuery } from "react-query";
 import Loading from '../../Components/Loading'
 const Tools = () => {
-    const { isLoading, data: tools } = useQuery("tool", () => fetch("https://shrouded-mesa-73405.herokuapp.com/tools/home").then(res => res.json())
+    const { isLoading, data: tools } = useQuery("tool", () => fetch("https://drill-insomnia-server.onrender.com/tools/home").then(res => res.json())
     )
     if (isLoading) {
         return <Loading></Loading>;

@@ -13,7 +13,7 @@ const useToken = (user) => {
             linkedIn: "None added",
         }
         if (email) {
-            fetch(`https://shrouded-mesa-73405.herokuapp.com/user/${email}`, {
+            fetch(`https://drill-insomnia-server.onrender.com/user/${email}`, {
                 method: "PUT",
                 headers: {
                     "content-type": "application/json"

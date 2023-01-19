@@ -6,10 +6,10 @@ import auth from '../../firebase.init';
 
 const AddReview = () => {
 
-    const { register, handleSubmit, formState: { errors },reset } = useForm()
+    const { register, handleSubmit, formState: { errors }, reset } = useForm()
     const [user] = useAuthState(auth)
     const onSubmit = (data, event) => {
-        fetch("https://shrouded-mesa-73405.herokuapp.com/rating", {
+        fetch("https://drill-insomnia-server.onrender.com/rating", {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -59,9 +59,9 @@ const AddReview = () => {
                     <p className="text-red-500">{errors.review?.type === 'required' && "Rating is required"}</p>
                     <p className="text-red-500">{errors.review?.type === 'max' && `Rating can not be more than 5`}</p>
                 </div>
-               
-               
-               
+
+
+
                 <button className="btn">Submit Review</button>
             </form>
         </div>

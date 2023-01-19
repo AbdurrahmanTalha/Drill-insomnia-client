@@ -11,7 +11,7 @@ const ManageOrder = () => {
 
 
     useEffect(() => {
-        fetch("https://shrouded-mesa-73405.herokuapp.com/orders", {
+        fetch("https://drill-insomnia-server.onrender.com/orders", {
             method: "GET",
             headers: {
                 authorization: `Bearer ${localStorage.getItem("accessToken")}`
@@ -24,7 +24,7 @@ const ManageOrder = () => {
     }, [orders])
     const updatePending = (_id) => {
         console.log(_id)
-        fetch(`https://shrouded-mesa-73405.herokuapp.com/pending/${_id}`, {
+        fetch(`https://drill-insomnia-server.onrender.com/pending/${_id}`, {
             method: "PUT",
             headers: {
                 authorization: `Bearer ${localStorage.getItem("accessToken")}`
@@ -34,7 +34,7 @@ const ManageOrder = () => {
     }
 
     return (
-         <div className="mb-10">
+        <div className="mb-10">
             <h2 className="text-2xl font-bold pl-6">Manage Orders</h2>
             <div className="overflow-x-auto">
                 <table className="md:table lg:table w-full">
@@ -75,8 +75,8 @@ const ManageOrder = () => {
                 </table>
             </div>
             {deleteOrder && <DeletingConfirmOrderModal deleteOrder={deleteOrder}></DeletingConfirmOrderModal>}
-        </div> 
-        
+        </div>
+
     );
 };
 

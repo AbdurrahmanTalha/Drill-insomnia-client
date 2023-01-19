@@ -4,7 +4,7 @@ import Loading from '../../Components/Loading';
 import AdminRow from './AdminRow';
 
 const MakeAdmin = () => {
-    const { data: users, isLoading, refetch } = useQuery('user', () => fetch("https://shrouded-mesa-73405.herokuapp.com/user", {
+    const { data: users, isLoading, refetch } = useQuery('user', () => fetch("https://drill-insomnia-server.onrender.com/user", {
         method: "GET",
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`

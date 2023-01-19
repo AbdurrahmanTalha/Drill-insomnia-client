@@ -12,7 +12,7 @@ const MyProfile = () => {
     const [updateProfile, updating, error] = useUpdateProfile(auth);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const { data: usersDB, isLoading, refetch } = useQuery('users', () => fetch(`https://shrouded-mesa-73405.herokuapp.com/user/${user.email}`, {
+    const { data: usersDB, isLoading, refetch } = useQuery('users', () => fetch(`https://drill-insomnia-server.onrender.com/user/${user.email}`, {
         method: "GET",
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -30,7 +30,7 @@ const MyProfile = () => {
             location: data.location,
             phoneNumber: data.phoneNumber
         }
-        fetch(`https://shrouded-mesa-73405.herokuapp.com/myProfile/${user.email}`, {
+        fetch(`https://drill-insomnia-server.onrender.com/myProfile/${user.email}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json",

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 const AddProduct = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
     const onSubmit = (data) => {
-        fetch(`https://shrouded-mesa-73405.herokuapp.com/product`, {
+        fetch(`https://drill-insomnia-server.onrender.com/product`, {
             method: "POST",
             headers: {
                 "content-type": "application/json",

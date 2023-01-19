@@ -16,7 +16,7 @@ const CheckoutForm = ({ product }) => {
     const navigate = useNavigate()
     useEffect(() => {
         setLoading(true)
-        fetch("https://shrouded-mesa-73405.herokuapp.com/create-payment-intent", {
+        fetch("https://drill-insomnia-server.onrender.com/create-payment-intent", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -88,7 +88,7 @@ const CheckoutForm = ({ product }) => {
                 product: _id,
                 transactionId: paymentIntent.id
             }
-            fetch(`https://shrouded-mesa-73405.herokuapp.com/payment/${_id}`, {
+            fetch(`https://drill-insomnia-server.onrender.com/payment/${_id}`, {
                 method: "PATCH",
                 headers: {
                     "content-type": "application/json",
